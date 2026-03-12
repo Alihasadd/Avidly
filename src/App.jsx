@@ -770,8 +770,9 @@ function ResourcesPage({ t }) {
             { name: "Layoff Data", desc: "Comprehensive WARN database", url: "https://layoffdata.com/", color: "#7C3AED", initial: "L" },
             { name: "LayoffAlert.org", desc: "Get email alerts for your company", url: "https://layoffalert.org/", color: "#D946A8", initial: "LA" },
             { name: "DOL WARN Act", desc: "Official federal WARN info", url: "https://www.dol.gov/agencies/eta/layoffs/warn", color: "#1D4ED8", initial: "DOL" },
+            { name: "Layoffs.fyi", desc: "Track tech layoffs in real time", url: "https://layoffs.fyi/", color: "#0F172A", initial: "L" },
           ].map((res, i) => {
-            const cColors = [t.accent, t.accent, t.pop, t.warm, t.violet, t.pop, t.accent];
+            const cColors = [t.accent, t.accent, t.pop, t.warm, t.violet, t.pop, t.accent, t.text];
             return (
               <a key={res.name} href={res.url} target="_blank" rel="noopener noreferrer"
                 style={{ background: t.bgCard, borderRadius: 14, border: `1.5px solid ${t.border}`, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
