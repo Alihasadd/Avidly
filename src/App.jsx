@@ -596,7 +596,7 @@ function ServicesPage({ t }) {
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16 }}>
           <PriceCard t={t} colorScheme="pop" title="Layoff 1:1 Support" original="500" price="250" features={["Severance negotiation advice", "Unemployment filing guidance", "Next steps action plan", "Emotional support & strategy"]} />
-          <PriceCard t={t} colorScheme="warm" title="Layoff Checklist" price="Free" link="https://docs.google.com/document/d/YOUR_DOC_ID/edit" linkLabel="Get Checklist" features={["Systems access — save contacts, files, & work samples", "Health insurance & COBRA coverage", "Expense reimbursements & final pay", "401k & retirement accounts", "Severance package review", "Unemployment filing steps", "References & recommendation letters", "Equipment return & personal items", "Performance reviews & metrics for interviews", "Paystubs & proof of income"]} />
+          <PriceCard t={t} colorScheme="warm" title="Layoff Checklist" price="Free" link="https://docs.google.com/document/d/18LKuoYX6MpbaaRDOSJSq5eV7stcbiXsE/edit?usp=sharing&ouid=110756126822033645252&rtpof=true&sd=true" linkLabel="Get Checklist" features={["Systems access — save contacts, files, & work samples", "Health insurance & COBRA coverage", "Expense reimbursements & final pay", "401k & retirement accounts", "Severance package review", "Unemployment filing steps", "References & recommendation letters", "Equipment return & personal items", "Performance reviews & metrics for interviews", "Paystubs & proof of income"]} />
         </div>
       </div>
 
