@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const SIMPLIFY_GIF = "/mnt/user-data/uploads/Simplify_jobs.gif";
+const SIMPLIFY_GIF = "/Simplify_jobs.gif";
 
 // ─── Theme tokens ───
 const themes = {
@@ -192,9 +192,10 @@ function Nav({ page, setPage, theme, toggleTheme, t }) {
 }
 
 // ─── Price Card ───
-function PriceCard({ title, original, price, features, tag, t, colorScheme, link }) {
+function PriceCard({ title, original, price, features, tag, t, colorScheme, link, linkLabel }) {
   const fade = useFadeIn();
   const [hovered, setHovered] = useState(false);
+  const [showZelle, setShowZelle] = useState(false);
   const isFree = price === "Free";
   const schemes = {
     teal: { pill: t.accent, check: t.accent, borderHover: t.accent },
@@ -205,6 +206,12 @@ function PriceCard({ title, original, price, features, tag, t, colorScheme, link
   };
   const s = schemes[colorScheme] || schemes.teal;
   const isBundle = colorScheme === "bundle";
+
+  const payMethods = [
+    { name: "Venmo", url: "https://venmo.com/u/Alividler", color: "#008CFF", icon: "V" },
+    { name: "PayPal", url: "https://www.paypal.com/paypalme/my/profile", color: "#003087", icon: "P" },
+    { name: "Zelle", url: null, color: "#6D1ED4", icon: "Z" },
+  ];
 
   return (
     <div ref={fade.ref}
@@ -236,11 +243,44 @@ function PriceCard({ title, original, price, features, tag, t, colorScheme, link
       )}
       {link && (
         <a href={link} target="_blank" rel="noopener noreferrer"
-          style={{ display: "inline-flex", alignItems: "center", gap: 6, background: s.pill, color: "#fff", borderRadius: 8, padding: "10px 18px", fontSize: 13, fontWeight: 600, textDecoration: "none", transition: "all 0.2s", fontFamily: "'DM Sans', sans-serif", marginTop: "auto" }}
+          style={{ display: "inline-flex", alignItems: "center", gap: 6, background: s.pill, color: "#fff", borderRadius: 8, padding: "10px 18px", fontSize: 13, fontWeight: 600, textDecoration: "none", transition: "all 0.2s", fontFamily: "'DM Sans', sans-serif" }}
           onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.9"; e.currentTarget.style.transform = "translateY(-1px)"; }}
           onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}>
-          Watch Now <ExternalLinkIcon />
+          {linkLabel || "Watch Now"} <ExternalLinkIcon />
         </a>
+      )}
+      {/* Payment buttons for paid services */}
+      {!isFree && (
+        <div style={{ marginTop: "auto", borderTop: `1px solid ${isBundle ? "rgba(255,255,255,0.15)" : t.border}`, paddingTop: 14 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: isBundle ? "rgba(255,255,255,0.6)" : t.textLight, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: 8, fontFamily: "'DM Sans', sans-serif" }}>Pay with</div>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {payMethods.map((pm) => (
+              pm.url ? (
+                <a key={pm.name} href={pm.url} target="_blank" rel="noopener noreferrer"
+                  style={{ display: "inline-flex", alignItems: "center", gap: 5, background: isBundle ? "rgba(255,255,255,0.18)" : t.bgCardHover || t.borderLight, color: isBundle ? "#fff" : t.text, borderRadius: 7, padding: "7px 12px", fontSize: 12, fontWeight: 600, textDecoration: "none", transition: "all 0.2s", fontFamily: "'DM Sans', sans-serif", border: `1px solid ${isBundle ? "rgba(255,255,255,0.1)" : t.border}` }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = pm.color; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = pm.color; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = isBundle ? "rgba(255,255,255,0.18)" : (t.bgCardHover || t.borderLight); e.currentTarget.style.color = isBundle ? "#fff" : t.text; e.currentTarget.style.borderColor = isBundle ? "rgba(255,255,255,0.1)" : t.border; }}>
+                  <span style={{ width: 18, height: 18, borderRadius: 4, background: pm.color, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 10, fontWeight: 800 }}>{pm.icon}</span>
+                  {pm.name}
+                </a>
+              ) : (
+                <button key={pm.name} onClick={() => setShowZelle(!showZelle)}
+                  style={{ display: "inline-flex", alignItems: "center", gap: 5, background: isBundle ? "rgba(255,255,255,0.18)" : t.bgCardHover || t.borderLight, color: isBundle ? "#fff" : t.text, borderRadius: 7, padding: "7px 12px", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.2s", fontFamily: "'DM Sans', sans-serif", border: `1px solid ${isBundle ? "rgba(255,255,255,0.1)" : t.border}` }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = pm.color; e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = pm.color; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = isBundle ? "rgba(255,255,255,0.18)" : (t.bgCardHover || t.borderLight); e.currentTarget.style.color = isBundle ? "#fff" : t.text; e.currentTarget.style.borderColor = isBundle ? "rgba(255,255,255,0.1)" : t.border; }}>
+                  <span style={{ width: 18, height: 18, borderRadius: 4, background: pm.color, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 10, fontWeight: 800 }}>{pm.icon}</span>
+                  {pm.name}
+                </button>
+              )
+            ))}
+          </div>
+          {showZelle && (
+            <div style={{ marginTop: 12, background: isBundle ? "rgba(255,255,255,0.12)" : t.violetLight, borderRadius: 10, padding: "14px 16px", border: `1px solid ${isBundle ? "rgba(255,255,255,0.1)" : t.border}` }}>
+              <img src="/mnt/user-data/uploads/3584f5755519f656834b8f4db1c8718ac2853b6b.jpeg" alt="Zelle QR Code — Scan in your bank app to pay" style={{ width: "100%", maxWidth: 200, borderRadius: 8, margin: "0 auto", display: "block" }} />
+              <p style={{ fontSize: 12, color: isBundle ? "rgba(255,255,255,0.7)" : t.textMuted, textAlign: "center", marginTop: 8, fontFamily: "'DM Sans', sans-serif" }}>Scan with your bank app to pay via Zelle</p>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
@@ -265,7 +305,7 @@ function AboutPage({ t, setPage }) {
           <h1 style={{ fontSize: "clamp(34px, 5.5vw, 56px)", fontWeight: 800, color: t.text, lineHeight: 1.12, marginBottom: 22, fontFamily: "'Fraunces', Georgia, serif", letterSpacing: "-0.02em", fontOpticalSizing: "auto" }}>
             Navigate your job search{" "}
             <span style={{ display: "inline-block" }}>with an{" "}
-              <span style={{ background: t.gradient, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>insider's perspective</span>
+              <span style={{ background: "linear-gradient(135deg, #0D9488 0%, #D946A8 50%, #E5960B 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>insider's perspective</span>
             </span>
           </h1>
           <p style={{ fontSize: "clamp(16px, 2vw, 19px)", color: t.textMuted, lineHeight: 1.7, maxWidth: 600, margin: "0 auto 36px", fontFamily: "'DM Sans', sans-serif" }}>
@@ -421,16 +461,16 @@ function TestimonialsCarousel({ t }) {
         <p style={{ fontSize: 16, color: t.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Real results from real job seekers.</p>
       </div>
 
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", overflow: "hidden", padding: "0 20px" }}>
         {/* Arrow buttons */}
         <button onClick={() => go(-1)} aria-label="Previous testimonial"
-          style={{ position: "absolute", top: "50%", left: -16, transform: "translateY(-50%)", zIndex: 2, width: 42, height: 42, borderRadius: "50%", background: t.bgCard, border: `1.5px solid ${t.border}`, boxShadow: t.shadow, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: t.textMuted, transition: "all 0.2s" }}
+          style={{ position: "absolute", top: "50%", left: 0, transform: "translateY(-50%)", zIndex: 2, width: 42, height: 42, borderRadius: "50%", background: t.bgCard, border: `1.5px solid ${t.border}`, boxShadow: t.shadow, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: t.textMuted, transition: "all 0.2s" }}
           onMouseEnter={(e) => { e.currentTarget.style.borderColor = t.accent; e.currentTarget.style.color = t.accent; e.currentTarget.style.boxShadow = t.shadowHover; }}
           onMouseLeave={(e) => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.color = t.textMuted; e.currentTarget.style.boxShadow = t.shadow; }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
         </button>
         <button onClick={() => go(1)} aria-label="Next testimonial"
-          style={{ position: "absolute", top: "50%", right: -16, transform: "translateY(-50%)", zIndex: 2, width: 42, height: 42, borderRadius: "50%", background: t.bgCard, border: `1.5px solid ${t.border}`, boxShadow: t.shadow, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: t.textMuted, transition: "all 0.2s" }}
+          style={{ position: "absolute", top: "50%", right: 0, transform: "translateY(-50%)", zIndex: 2, width: 42, height: 42, borderRadius: "50%", background: t.bgCard, border: `1.5px solid ${t.border}`, boxShadow: t.shadow, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: t.textMuted, transition: "all 0.2s" }}
           onMouseEnter={(e) => { e.currentTarget.style.borderColor = t.accent; e.currentTarget.style.color = t.accent; e.currentTarget.style.boxShadow = t.shadowHover; }}
           onMouseLeave={(e) => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.color = t.textMuted; e.currentTarget.style.boxShadow = t.shadow; }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
@@ -539,7 +579,7 @@ function ServicesPage({ t }) {
           Job Seeker Services
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16 }}>
-          <PriceCard t={t} colorScheme="teal" title="How Companies Recruit" price="Free" link="https://www.youtube.com/live/n0CJMMcdD4M?si=9DsaEiU8Ka0g0mjD" features={["Understand the recruiting process from the inside", "Learn how ATS and hiring tools work", "Know what recruiters are really looking for"]} />
+          <PriceCard t={t} colorScheme="teal" title="How Companies Recruit" price="Free" link="https://www.youtube.com/live/n0CJMMcdD4M?si=9DsaEiU8Ka0g0mjD" linkLabel="Watch Now" features={["Understand the recruiting process from the inside", "Learn how ATS and hiring tools work", "Know what recruiters are really looking for"]} />
           <PriceCard t={t} colorScheme="pop" title="1:1 Coaching Sessions" original="500" price="350" features={["3 personalized coaching sessions", "Tailored job search strategy", "Ongoing guidance and accountability"]} />
           <PriceCard t={t} colorScheme="warm" title="Resume Review & Rewrite" original="350" price="250" features={["2 sessions for deep-dive review", "ATS optimization guidance", "Rewrite with insider knowledge"]} />
           <PriceCard t={t} colorScheme="violet" title="Interview Practice" original="300" price="250" features={["Mock interviews with real feedback", "Behavioral & technical prep", "Confidence-building techniques"]} />
@@ -556,7 +596,7 @@ function ServicesPage({ t }) {
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16 }}>
           <PriceCard t={t} colorScheme="pop" title="Layoff 1:1 Support" original="500" price="250" features={["Severance negotiation advice", "Unemployment filing guidance", "Next steps action plan", "Emotional support & strategy"]} />
-          <PriceCard t={t} colorScheme="warm" title="Layoff List" price="Free" features={["Curated list of companies hiring", "Updated regularly", "Targeted to your skills & industry"]} />
+          <PriceCard t={t} colorScheme="warm" title="Layoff Checklist" price="Free" link="https://docs.google.com/document/d/YOUR_DOC_ID/edit" linkLabel="Get Checklist" features={["Systems access — save contacts, files, & work samples", "Health insurance & COBRA coverage", "Expense reimbursements & final pay", "401k & retirement accounts", "Severance package review", "Unemployment filing steps", "References & recommendation letters", "Equipment return & personal items", "Performance reviews & metrics for interviews", "Paystubs & proof of income"]} />
         </div>
       </div>
 
@@ -652,8 +692,9 @@ function ResourcesPage({ t }) {
             { name: "Meta", url: "https://us.meta.talentnet.community/jobs/search", color: "#0081FB", initial: "M" },
             { name: "Apple", url: "https://lnkd.in/e49UAQkk", color: "#555555", initial: "A" },
             { name: "Airbnb", url: "https://lnkd.in/exGTKXbt", color: "#FF385C", initial: "A" },
+            { name: "Insight Global", url: "https://jobs.insightglobal.com/", color: "#0057B8", initial: "IG" },
           ].map((co, i) => {
-            const cColors = [t.warm, t.accent, t.pop, t.violet, t.pop];
+            const cColors = [t.warm, t.accent, t.pop, t.violet, t.pop, t.accent];
             return (
               <a key={co.name} href={co.url} target="_blank" rel="noopener noreferrer"
                 style={{ background: t.bgCard, borderRadius: 14, border: `1.5px solid ${t.border}`, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
@@ -677,6 +718,9 @@ function ResourcesPage({ t }) {
           <span style={{ width: 36, height: 4, background: t.gradientTealPop, borderRadius: 2, display: "inline-block" }} />
           Comp Tools
         </h3>
+        <p style={{ fontSize: 15, color: t.textMuted, lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif", marginBottom: 20, maxWidth: 640 }}>
+          Knowledge is power when it comes to negotiating your offer. Use these tools to research salary ranges, compare compensation across companies and levels, and walk into every negotiation with the data you need to advocate for yourself.
+        </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 14 }}>
           {[
             { name: "Payscale", url: "https://www.payscale.com/research/US/Job", color: "#0066CC", initial: "P" },
@@ -700,6 +744,45 @@ function ResourcesPage({ t }) {
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>{tool.name}</div>
                   <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>Research pay <ExternalLinkIcon /></div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Layoff Resources */}
+      <section style={{ marginTop: 40 }}>
+        <h3 style={{ fontSize: 20, fontWeight: 700, color: t.text, marginBottom: 8, fontFamily: "'DM Sans', sans-serif", display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ width: 36, height: 4, background: t.gradientWarm, borderRadius: 2, display: "inline-block" }} />
+          Layoff Resources
+          <span style={{ color: t.pop, marginLeft: 4 }}><HeartIcon /></span>
+        </h3>
+        <p style={{ fontSize: 14, color: t.textMuted, marginBottom: 20, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.6 }}>
+          If you've been laid off or are worried about potential layoffs, these resources can help you stay informed and take action.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 14 }}>
+          {[
+            { name: "File for Unemployment", desc: "Find your state's filing site", url: "https://www.careeronestop.org/LocalHelp/UnemploymentBenefits/find-unemployment-benefits.aspx", color: "#0D9488", initial: "UI" },
+            { name: "USAGov Unemployment", desc: "Federal guide & state map", url: "https://www.usa.gov/unemployment-benefits", color: "#112E51", initial: "US" },
+            { name: "WARN Tracker", desc: "Search layoff notices by company", url: "https://www.warntracker.com/", color: "#DC2626", initial: "W" },
+            { name: "WARN Firehose", desc: "Daily updates, all 50 states", url: "https://warnfirehose.com/data/layoffs", color: "#EA580C", initial: "W" },
+            { name: "Layoff Data", desc: "Comprehensive WARN database", url: "https://layoffdata.com/", color: "#7C3AED", initial: "L" },
+            { name: "LayoffAlert.org", desc: "Get email alerts for your company", url: "https://layoffalert.org/", color: "#D946A8", initial: "LA" },
+            { name: "DOL WARN Act", desc: "Official federal WARN info", url: "https://www.dol.gov/agencies/eta/layoffs/warn", color: "#1D4ED8", initial: "DOL" },
+          ].map((res, i) => {
+            const cColors = [t.accent, t.accent, t.pop, t.warm, t.violet, t.pop, t.accent];
+            return (
+              <a key={res.name} href={res.url} target="_blank" rel="noopener noreferrer"
+                style={{ background: t.bgCard, borderRadius: 14, border: `1.5px solid ${t.border}`, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
+                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.borderColor = cColors[i]; }}
+                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.borderColor = t.border; }}>
+                <div style={{ width: 44, height: 44, borderRadius: 10, background: res.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <span style={{ color: "#fff", fontWeight: 700, fontSize: res.initial.length > 2 ? 11 : res.initial.length > 1 ? 13 : 18, fontFamily: "'DM Sans', sans-serif" }}>{res.initial}</span>
+                </div>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>{res.name}</div>
+                  <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>{res.desc} <ExternalLinkIcon /></div>
                 </div>
               </a>
             );
@@ -783,22 +866,23 @@ export default function App() {
   const changePage = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   return (
-    <div style={{ minHeight: "100vh", background: t.bg, color: t.text, transition: "background 0.4s, color 0.4s", fontFamily: "'DM Sans', sans-serif" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: t.bg, color: t.text, transition: "none", fontFamily: "'DM Sans', sans-serif", overflowX: "hidden", width: "100%" }}>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet" />
       <style>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { margin: 0; -webkit-font-smoothing: antialiased; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { margin: 0; padding: 0; overflow-x: hidden; width: 100%; }
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         ::selection { background: ${t.accentSoft}; color: ${t.text}; }
         :focus-visible { outline: 2px solid ${t.accent}; outline-offset: 2px; border-radius: 4px; }
-        img { max-width: 100%; height: auto; }
+        img { max-width: 100%; height: auto; display: block; }
         @media (max-width: 768px) { .desktop-nav { display: none !important; } .mobile-nav { display: flex !important; } }
         @media (min-width: 769px) { .mobile-dropdown { display: none !important; } }
       `}</style>
 
       <Nav page={page} setPage={changePage} theme={theme} toggleTheme={toggleTheme} t={t} />
-      <main role="main" aria-label={page}>
+      <main role="main" aria-label={page} style={{ flex: 1 }}>
         {page === "About" && <AboutPage t={t} setPage={changePage} />}
         {page === "Services" && <ServicesPage t={t} />}
         {page === "Resources" && <ResourcesPage t={t} />}
