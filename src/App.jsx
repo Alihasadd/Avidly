@@ -305,7 +305,7 @@ function AboutPage({ t, setPage }) {
           <h1 style={{ fontSize: "clamp(34px, 5.5vw, 56px)", fontWeight: 800, color: t.text, lineHeight: 1.12, marginBottom: 22, fontFamily: "'Fraunces', Georgia, serif", letterSpacing: "-0.02em", fontOpticalSizing: "auto" }}>
             Navigate your job search{" "}
             <span style={{ display: "inline-block" }}>with an{" "}
-              <span style={{ background: "linear-gradient(135deg, #0D9488 0%, #D946A8 50%, #E5960B 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", color: "transparent" }}>insider's perspective</span>
+              <span style={{ background: t.gradient, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>insider's perspective</span>
             </span>
           </h1>
           <p style={{ fontSize: "clamp(16px, 2vw, 19px)", color: t.textMuted, lineHeight: 1.7, maxWidth: 600, margin: "0 auto 36px", fontFamily: "'DM Sans', sans-serif" }}>
@@ -331,6 +331,12 @@ function AboutPage({ t, setPage }) {
       <section ref={vid.ref} style={{ ...vid.style, maxWidth: 800, margin: "0 auto", padding: "48px 24px 60px" }}>
         <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: t.shadowLg, border: `1px solid ${t.border}`, position: "relative", paddingBottom: "56.25%", height: 0 }}>
           <iframe width="100%" height="100%" src="https://www.youtube.com/embed/n0CJMMcdD4M?si=daLYlHqDoPVRJEyS" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} />
+        </div>
+      </section>
+
+      <section style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px 60px" }}>
+        <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: t.shadowLg, border: `1px solid ${t.border}`, position: "relative", paddingBottom: "56.25%", height: 0 }}>
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/kSQOy6xOws0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} />
         </div>
       </section>
 
@@ -580,8 +586,8 @@ function ServicesPage({ t }) {
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16 }}>
           <PriceCard t={t} colorScheme="teal" title="How Companies Recruit" price="Free" link="https://www.youtube.com/live/n0CJMMcdD4M?si=9DsaEiU8Ka0g0mjD" linkLabel="Watch Now" features={["Understand the recruiting process from the inside", "Learn how ATS and hiring tools work", "Know what recruiters are really looking for"]} />
-          <PriceCard t={t} colorScheme="pop" title="1:1 Coaching Sessions" original="500" price="350" features={["3 personalized coaching sessions", "Tailored job search strategy", "Ongoing guidance and accountability"]} />
-          <PriceCard t={t} colorScheme="warm" title="Resume Review & Rewrite" original="350" price="250" features={["2 sessions for deep-dive review", "ATS optimization guidance", "Rewrite with insider knowledge"]} />
+          <PriceCard t={t} colorScheme="pop" title="1:1 Coaching Sessions" original="1150" price="850" features={["3 personalized coaching sessions", "Tailored job search strategy", "Ongoing guidance and accountability"]} />
+          <PriceCard t={t} colorScheme="warm" title="Resume Review & Rewrite" original="500" price="350" features={["2 sessions for deep-dive review", "ATS optimization guidance", "Rewrite with insider knowledge"]} />
           <PriceCard t={t} colorScheme="violet" title="Interview Practice" original="300" price="250" features={["Mock interviews with real feedback", "Behavioral & technical prep", "Confidence-building techniques"]} />
           <PriceCard t={t} colorScheme="teal" title="Negotiation Coaching" original="250" price="150" features={["Salary & offer negotiation strategy", "Scripts and frameworks", "Know your leverage"]} />
           <PriceCard t={t} colorScheme="bundle" title="All Services Bundle" original="1000" price="800" tag="Best Value" features={["Everything listed above", "Priority scheduling", "Full support from search to offer"]} />
@@ -596,7 +602,7 @@ function ServicesPage({ t }) {
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16 }}>
           <PriceCard t={t} colorScheme="pop" title="Layoff 1:1 Support" original="500" price="250" features={["Severance negotiation advice", "Unemployment filing guidance", "Next steps action plan", "Emotional support & strategy"]} />
-          <PriceCard t={t} colorScheme="warm" title="Layoff Checklist" price="Free" link="https://docs.google.com/document/d/18LKuoYX6MpbaaRDOSJSq5eV7stcbiXsE/edit?usp=sharing&ouid=110756126822033645252&rtpof=true&sd=true" linkLabel="Get Checklist" features={["Systems access — save contacts, files, & work samples", "Health insurance & COBRA coverage", "Expense reimbursements & final pay", "401k & retirement accounts", "Severance package review", "Unemployment filing steps", "References & recommendation letters", "Equipment return & personal items", "Performance reviews & metrics for interviews", "Paystubs & proof of income"]} />
+          <PriceCard t={t} colorScheme="warm" title="Layoff Checklist" price="Free" link="https://docs.google.com/document/d/YOUR_DOC_ID/edit" linkLabel="Get Checklist" features={["Systems access — save contacts, files, & work samples", "Health insurance & COBRA coverage", "Expense reimbursements & final pay", "401k & retirement accounts", "Severance package review", "Unemployment filing steps", "References & recommendation letters", "Equipment return & personal items", "Performance reviews & metrics for interviews", "Paystubs & proof of income"]} />
         </div>
       </div>
 
@@ -770,9 +776,8 @@ function ResourcesPage({ t }) {
             { name: "Layoff Data", desc: "Comprehensive WARN database", url: "https://layoffdata.com/", color: "#7C3AED", initial: "L" },
             { name: "LayoffAlert.org", desc: "Get email alerts for your company", url: "https://layoffalert.org/", color: "#D946A8", initial: "LA" },
             { name: "DOL WARN Act", desc: "Official federal WARN info", url: "https://www.dol.gov/agencies/eta/layoffs/warn", color: "#1D4ED8", initial: "DOL" },
-            { name: "Layoffs.fyi", desc: "Track tech layoffs in real time", url: "https://layoffs.fyi/", color: "#0F172A", initial: "L" },
           ].map((res, i) => {
-            const cColors = [t.accent, t.accent, t.pop, t.warm, t.violet, t.pop, t.accent, t.text];
+            const cColors = [t.accent, t.accent, t.pop, t.warm, t.violet, t.pop, t.accent];
             return (
               <a key={res.name} href={res.url} target="_blank" rel="noopener noreferrer"
                 style={{ background: t.bgCard, borderRadius: 14, border: `1.5px solid ${t.border}`, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
@@ -790,12 +795,46 @@ function ResourcesPage({ t }) {
           })}
         </div>
       </section>
+
+      {/* Invite Only */}
+      <section style={{ marginTop: 40 }}>
+        <h3 style={{ fontSize: 20, fontWeight: 700, color: t.text, marginBottom: 20, fontFamily: "'DM Sans', sans-serif", display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ width: 36, height: 4, background: t.gradient, borderRadius: 2, display: "inline-block" }} />
+          Invite Only
+        </h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 14 }}>
+          <a href="https://sqmafia.vercel.app/" target="_blank" rel="noopener noreferrer"
+            style={{ background: t.bgCard, borderRadius: 14, border: "1.5px solid " + t.border, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
+            onMouseEnter={function(e) { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; }}
+            onMouseLeave={function(e) { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, background: "#00D632", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span style={{ color: "#fff", fontWeight: 700, fontSize: 14, fontFamily: "'DM Sans', sans-serif" }}>SQ</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>Square Mafia</div>
+              <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>Visit site</div>
+            </div>
+          </a>
+          <a href="https://discord.gg/rghvBD8n" target="_blank" rel="noopener noreferrer"
+            style={{ background: t.bgCard, borderRadius: 14, border: "1.5px solid " + t.border, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
+            onMouseEnter={function(e) { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; }}
+            onMouseLeave={function(e) { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, background: "#E60023", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span style={{ color: "#fff", fontWeight: 700, fontSize: 14, fontFamily: "'DM Sans', sans-serif" }}>PF</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>Pin-Friends</div>
+              <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>Join Discord</div>
+            </div>
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
 
 // ─── Contact Page ───
-function ContactPage({ t }) {
+function ContactPage({ t, setPage }) {
   const header = useFadeIn();
   const cards = useFadeIn();
 
@@ -835,6 +874,20 @@ function ContactPage({ t }) {
           </div>
           <span style={{ color: "#0A66C2", flexShrink: 0 }}><ArrowIcon /></span>
         </a>
+
+        <button onClick={() => setPage("Services")}
+          style={{ background: t.bgCard, borderRadius: 18, border: `2px solid ${t.border}`, padding: "32px 28px", textDecoration: "none", display: "flex", alignItems: "center", gap: 20, transition: "all 0.3s", boxShadow: t.shadow, cursor: "pointer", width: "100%", textAlign: "left", fontFamily: "'DM Sans', sans-serif" }}
+          onMouseEnter={(e) => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.borderColor = t.accent; }}
+          onMouseLeave={(e) => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.borderColor = t.border; }}>
+          <div style={{ width: 56, height: 56, borderRadius: 14, background: t.gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#fff" }}>
+            <SparkleIcon />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: t.text, fontFamily: "'DM Sans', sans-serif", marginBottom: 4 }}>View Services</div>
+            <div style={{ fontSize: 14, color: t.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Explore coaching packages, resume reviews, and more.</div>
+          </div>
+          <span style={{ color: t.accent, flexShrink: 0 }}><ArrowIcon /></span>
+        </button>
       </div>
     </div>
   );
@@ -867,7 +920,7 @@ export default function App() {
   const changePage = (p) => { setPage(p); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: t.bg, color: t.text, transition: "none", fontFamily: "'DM Sans', sans-serif", overflowX: "hidden", width: "100%" }}>
+    <div style={{ minHeight: "100vh", background: t.bg, color: t.text, transition: "background 0.4s, color 0.4s", fontFamily: "'DM Sans', sans-serif", overflowX: "hidden", width: "100%" }}>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet" />
@@ -883,11 +936,11 @@ export default function App() {
       `}</style>
 
       <Nav page={page} setPage={changePage} theme={theme} toggleTheme={toggleTheme} t={t} />
-      <main role="main" aria-label={page} style={{ flex: 1 }}>
+      <main role="main" aria-label={page}>
         {page === "About" && <AboutPage t={t} setPage={changePage} />}
         {page === "Services" && <ServicesPage t={t} />}
         {page === "Resources" && <ResourcesPage t={t} />}
-        {page === "Contact" && <ContactPage t={t} />}
+        {page === "Contact" && <ContactPage t={t} setPage={changePage} />}
       </main>
       <Footer t={t} />
     </div>

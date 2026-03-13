@@ -334,6 +334,12 @@ function AboutPage({ t, setPage }) {
         </div>
       </section>
 
+      <section style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px 60px" }}>
+        <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: t.shadowLg, border: `1px solid ${t.border}`, position: "relative", paddingBottom: "56.25%", height: 0 }}>
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/kSQOy6xOws0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }} />
+        </div>
+      </section>
+
       <section ref={bio.ref} style={{ ...bio.style, maxWidth: 820, margin: "0 auto", padding: "0 24px 90px" }}>
         <div style={{ background: t.bgCard, borderRadius: 20, padding: "clamp(28px, 4vw, 48px)", border: `1px solid ${t.border}`, boxShadow: t.shadow, position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: t.gradient }} />
@@ -580,8 +586,8 @@ function ServicesPage({ t }) {
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16 }}>
           <PriceCard t={t} colorScheme="teal" title="How Companies Recruit" price="Free" link="https://www.youtube.com/live/n0CJMMcdD4M?si=9DsaEiU8Ka0g0mjD" linkLabel="Watch Now" features={["Understand the recruiting process from the inside", "Learn how ATS and hiring tools work", "Know what recruiters are really looking for"]} />
-          <PriceCard t={t} colorScheme="pop" title="1:1 Coaching Sessions" original="500" price="350" features={["3 personalized coaching sessions", "Tailored job search strategy", "Ongoing guidance and accountability"]} />
-          <PriceCard t={t} colorScheme="warm" title="Resume Review & Rewrite" original="350" price="250" features={["2 sessions for deep-dive review", "ATS optimization guidance", "Rewrite with insider knowledge"]} />
+          <PriceCard t={t} colorScheme="pop" title="1:1 Coaching Sessions" original="1150" price="850" features={["3 personalized coaching sessions", "Tailored job search strategy", "Ongoing guidance and accountability"]} />
+          <PriceCard t={t} colorScheme="warm" title="Resume Review & Rewrite" original="500" price="350" features={["2 sessions for deep-dive review", "ATS optimization guidance", "Rewrite with insider knowledge"]} />
           <PriceCard t={t} colorScheme="violet" title="Interview Practice" original="300" price="250" features={["Mock interviews with real feedback", "Behavioral & technical prep", "Confidence-building techniques"]} />
           <PriceCard t={t} colorScheme="teal" title="Negotiation Coaching" original="250" price="150" features={["Salary & offer negotiation strategy", "Scripts and frameworks", "Know your leverage"]} />
           <PriceCard t={t} colorScheme="bundle" title="All Services Bundle" original="1000" price="800" tag="Best Value" features={["Everything listed above", "Priority scheduling", "Full support from search to offer"]} />
@@ -789,12 +795,46 @@ function ResourcesPage({ t }) {
           })}
         </div>
       </section>
+
+      {/* Invite Only */}
+      <section style={{ marginTop: 40 }}>
+        <h3 style={{ fontSize: 20, fontWeight: 700, color: t.text, marginBottom: 20, fontFamily: "'DM Sans', sans-serif", display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ width: 36, height: 4, background: t.gradient, borderRadius: 2, display: "inline-block" }} />
+          Invite Only
+        </h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 14 }}>
+          <a href="https://sqmafia.vercel.app/" target="_blank" rel="noopener noreferrer"
+            style={{ background: t.bgCard, borderRadius: 14, border: "1.5px solid " + t.border, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
+            onMouseEnter={function(e) { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; }}
+            onMouseLeave={function(e) { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, background: "#00D632", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span style={{ color: "#fff", fontWeight: 700, fontSize: 14, fontFamily: "'DM Sans', sans-serif" }}>SQ</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>Square Mafia</div>
+              <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>Visit site</div>
+            </div>
+          </a>
+          <a href="https://discord.gg/rghvBD8n" target="_blank" rel="noopener noreferrer"
+            style={{ background: t.bgCard, borderRadius: 14, border: "1.5px solid " + t.border, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
+            onMouseEnter={function(e) { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; }}
+            onMouseLeave={function(e) { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, background: "#E60023", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span style={{ color: "#fff", fontWeight: 700, fontSize: 14, fontFamily: "'DM Sans', sans-serif" }}>PF</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>Pin-Friends</div>
+              <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>Join Discord</div>
+            </div>
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
 
 // ─── Contact Page ───
-function ContactPage({ t }) {
+function ContactPage({ t, setPage }) {
   const header = useFadeIn();
   const cards = useFadeIn();
 
@@ -834,6 +874,20 @@ function ContactPage({ t }) {
           </div>
           <span style={{ color: "#0A66C2", flexShrink: 0 }}><ArrowIcon /></span>
         </a>
+
+        <button onClick={() => setPage("Services")}
+          style={{ background: t.bgCard, borderRadius: 18, border: `2px solid ${t.border}`, padding: "32px 28px", textDecoration: "none", display: "flex", alignItems: "center", gap: 20, transition: "all 0.3s", boxShadow: t.shadow, cursor: "pointer", width: "100%", textAlign: "left", fontFamily: "'DM Sans', sans-serif" }}
+          onMouseEnter={(e) => { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.borderColor = t.accent; }}
+          onMouseLeave={(e) => { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.borderColor = t.border; }}>
+          <div style={{ width: 56, height: 56, borderRadius: 14, background: t.gradient, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#fff" }}>
+            <SparkleIcon />
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: t.text, fontFamily: "'DM Sans', sans-serif", marginBottom: 4 }}>View Services</div>
+            <div style={{ fontSize: 14, color: t.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Explore coaching packages, resume reviews, and more.</div>
+          </div>
+          <span style={{ color: t.accent, flexShrink: 0 }}><ArrowIcon /></span>
+        </button>
       </div>
     </div>
   );
@@ -886,7 +940,7 @@ export default function App() {
         {page === "About" && <AboutPage t={t} setPage={changePage} />}
         {page === "Services" && <ServicesPage t={t} />}
         {page === "Resources" && <ResourcesPage t={t} />}
-        {page === "Contact" && <ContactPage t={t} />}
+        {page === "Contact" && <ContactPage t={t} setPage={changePage} />}
       </main>
       <Footer t={t} />
     </div>
