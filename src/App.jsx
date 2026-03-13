@@ -586,11 +586,11 @@ function ServicesPage({ t }) {
         </h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: 16 }}>
           <PriceCard t={t} colorScheme="teal" title="How Companies Recruit" price="Free" link="https://www.youtube.com/live/n0CJMMcdD4M?si=9DsaEiU8Ka0g0mjD" linkLabel="Watch Now" features={["Understand the recruiting process from the inside", "Learn how ATS and hiring tools work", "Know what recruiters are really looking for"]} />
-          <PriceCard t={t} colorScheme="pop" title="1:1 Coaching Sessions" original="1150" price="850" features={["3 personalized coaching sessions", "Tailored job search strategy", "Ongoing guidance and accountability"]} />
+          <PriceCard t={t} colorScheme="pop" title="Resume Feedback" original="250" price="150" features={["Get resume feedback & comments", "Tailored for target jobs", "Ongoing guidance"]} />
           <PriceCard t={t} colorScheme="warm" title="Resume Review & Rewrite" original="500" price="350" features={["2 sessions for deep-dive review", "ATS optimization guidance", "Rewrite with insider knowledge"]} />
           <PriceCard t={t} colorScheme="violet" title="Interview Practice" original="300" price="250" features={["Mock interviews with real feedback", "Behavioral & technical prep", "Confidence-building techniques"]} />
           <PriceCard t={t} colorScheme="teal" title="Negotiation Coaching" original="250" price="150" features={["Salary & offer negotiation strategy", "Scripts and frameworks", "Know your leverage"]} />
-          <PriceCard t={t} colorScheme="bundle" title="All Services Bundle" original="1000" price="800" tag="Best Value" features={["Everything listed above", "Priority scheduling", "Full support from search to offer"]} />
+          <PriceCard t={t} colorScheme="bundle" title="All Services Bundle" original="1250" price="1000" tag="Best Value" features={["Everything listed above", "Priority scheduling", "Full support from search to offer"]} />
         </div>
       </div>
 
