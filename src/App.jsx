@@ -632,6 +632,9 @@ function ResourcesPage({ t }) {
     { name: "Simply Hired", url: "https://www.simplyhired.com/search?l=arlington%2C+va", color: "#6B46C1", initial: "S" },
     { name: "USAJobs", url: "http://USAJobs.gov", color: "#112E51", initial: "US" },
     { name: "Troop HR", url: "https://community.troophr.com", color: "#7C3AED", initial: "T" },
+    { name: "Tom Manatos Jobs", url: "https://www.tommanatosjobs.com/", color: "#C0392B", initial: "TM" },
+    { name: "Insight Partners", url: "https://jobs.insightpartners.com/companies", color: "#003F5C", initial: "IP" },
+    { name: "Andreessen Horowitz", url: "https://jobs.a16z.com/jobs", color: "#000000", initial: "a16z" },
   ];
 
   const hoverColors = [t.accent, t.pop, t.warm, t.violet, t.accent, t.pop, t.warm, t.violet, t.accent, t.pop, t.warm, t.violet];
@@ -825,6 +828,18 @@ function ResourcesPage({ t }) {
             <div>
               <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>Pin-Friends</div>
               <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>Join Discord</div>
+            </div>
+          </a>
+          <a href="https://join.slack.com/t/womeninproduct/shared_invite/zt-3sqkcry9d-MCEtcwMdnBA2mJzMHuxLMg" target="_blank" rel="noopener noreferrer"
+            style={{ background: t.bgCard, borderRadius: 14, border: "1.5px solid " + t.border, padding: "20px", textDecoration: "none", display: "flex", alignItems: "center", gap: 14, transition: "all 0.25s", boxShadow: t.shadow }}
+            onMouseEnter={function(e) { e.currentTarget.style.boxShadow = t.shadowHover; e.currentTarget.style.transform = "translateY(-3px)"; }}
+            onMouseLeave={function(e) { e.currentTarget.style.boxShadow = t.shadow; e.currentTarget.style.transform = "translateY(0)"; }}>
+            <div style={{ width: 44, height: 44, borderRadius: 10, background: "#6B2D8B", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <span style={{ color: "#fff", fontWeight: 700, fontSize: 12, fontFamily: "'DM Sans', sans-serif" }}>WIP</span>
+            </div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 600, color: t.text, fontFamily: "'DM Sans', sans-serif" }}>Women In Product</div>
+              <div style={{ fontSize: 12, color: t.textMuted, display: "flex", alignItems: "center", gap: 4, marginTop: 2 }}>Join Slack</div>
             </div>
           </a>
         </div>
